@@ -27,6 +27,14 @@ alias nginx.disable='brew services stop nginx'
 alias nginx.restart='nginx.stop && nginx.start'
 alias nginx.logs='ls -ltrh /usr/local/etc/nginx/logs/'
 
+## MongoDB
+alias mongodb.start='mongod --config /usr/local/etc/mongod.conf'
+alias mongodb.stop='mongo admin --eval "db.shutdownServer()"'
+alias mongodb.enable='brew services start mongodb'
+alias mongodb.disable='brew services stop mongodb'
+alias mongodb.restart='mongodb.stop && mongodb.start'
+alias mongodb.logs='ls -ltrh /usr/local/var/log/mongodb/'
+
 ## MariaDB
 alias mysql.start='mysql.server start'
 alias mysql.stop='mysql.server start'
@@ -96,6 +104,7 @@ alias ta='tmux attach'
 
 # brew
 alias b='brew'
+alias bpurge='brew cleanup && brew cleanup -s && brew services cleanup'
 alias bcache='du -h /Users/${USER}/Library/Caches/homebrew | sort -h && echo "File count: $(ls -p /Users/${USER}/Library/Caches/homebrew/ | grep -v / | wc -l)"'
 
 # All in one homebrew, update commands
