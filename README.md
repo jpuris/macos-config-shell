@@ -14,8 +14,8 @@ cd .shell-config
 ```
 ### Set up the symlinks to new config
 ```
-ln -s $(pwd)/.shell_aliases.sh ${HOME}/.shell_aliases.sh
-ln -s $(pwd)/.zshrc ${HOME}/.zshrc
+ln -s $(pwd)/shell_aliases.sh ${HOME}/.shell_aliases.sh
+ln -s $(pwd)/zshrc ${HOME}/.zshrc
 touch ${HOME}/.env_vars.sh
 ```
 ## Dependencies
