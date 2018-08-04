@@ -3,9 +3,9 @@
 ### Backup current config
 ```
 mkdir ${HOME}/origin_shell_config
-test -e ${HOME}/.shell_aliases && mv ${HOME}/.shell_aliases ${HOME}/origin_shell_config/
+test -e ${HOME}/.shell_aliases.sh && mv ${HOME}/.shell_aliases.sh ${HOME}/origin_shell_config/
 test -e ${HOME}/.zshrc && mv ${HOME}/.zshrc ${HOME}/origin_shell_config/
-test -e ${HOME}/.env_vars && mv ${HOME}/.env_vars ${HOME}/origin_shell_config/
+test -e ${HOME}/.env_vars.sh && mv ${HOME}/.env_vars.sh ${HOME}/origin_shell_config/
 ```
 ### Clone repo
 ```
@@ -14,9 +14,9 @@ cd .shell-config
 ```
 ### Set up the symlinks to new config
 ```
-ln -s $(pwd)/.shell_aliases ${HOME}/.shell_aliases
+ln -s $(pwd)/.shell_aliases.sh ${HOME}/.shell_aliases.sh
 ln -s $(pwd)/.zshrc ${HOME}/.zshrc
-touch ${HOME}/.env_vars
+touch ${HOME}/.env_vars.sh
 ```
 ## Dependencies
 ### Mandatory

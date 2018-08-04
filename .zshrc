@@ -8,8 +8,8 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 ## SOURCE ALIASES
-source ~/.env_vars
-source ~/.shell_aliases
+source ~/.env_vars.sh
+source ~/.shell_aliases.sh
 
 ## PATH
 export PATH=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/opt/X11/bin
