@@ -21,7 +21,7 @@ alias gze='f() { mac gzip:extract $1 };f'
 # Services
 ## NGinx
 alias nginx.start='nginx'
-alias nginx.stop='nginx -h'
+alias nginx.stop='kill -QUIT $( cat /usr/local/var/run/nginx.pid )'
 alias nginx.enable='brew services start nginx'
 alias nginx.disable='brew services stop nginx'
 alias nginx.restart='nginx.stop && nginx.start'
