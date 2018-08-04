@@ -1,20 +1,28 @@
+# Generic
 alias sudo='sudo '
-alias flushdns="sudo killall -HUPDNSResponder"
-alias mgmt="-p${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}"
-alias cmgmt="ssh -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}"
-alias cmgmtbak="ssh -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}"
-alias mmgmt="mkdir -p /tmp/${NM_MGMT_HOST}; sshfs -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}: /tmp/${NM_MGMT_HOST} -ocache=no -onolocalcaches -ovolname=${NM_MGMT_HOST}"
 alias ftree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
-alias pbi="ssh -L 8080:${NM_PENTAHO_HOST}:8080 -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}"
 alias svim="sudo -E vim"
-alias dev="ssh -p${DEV_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}"
-alias mdev="mkdir -p /tmp/dev; sshfs -p ${NM_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}: /tmp/dev -ocache=no -onolocalcaches -ovolname=dev"
 function procload() {
 	top -b -n 1 | awk '{if (NR <=7) print; else if ($8 == "D") {print; count++} } END {print "Total status D (I/O wait probably): "count}'
 }
 alias gnuplot='gnuplot -p'
 alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
+alias tmof="lsof | awk '{ print $2 " " $1; }' | sort -rn | uniq -c | sort -rn | head -20"
+alias ccat='pygmentize -g -O style=colorful,linenos=1'
 
+# Easy hosts
+alias hosts='sudo vim /etc/hosts'
+
+# MacOS
+alias flushdns="sudo killall -HUPDNSResponder"
+
+# Mac-CLI https://github.com/guarinogabriel/mac-cli
+alias tarc='f() { mac tar:compress $1 && rm -rf $1 };f'
+alias tare='f() { mac tar:extract $1 };f'
+alias gzc='f() { mac gzip:compress $1 && rm -f $1 };f'
+alias gze='f() { mac gzip:extract $1 };f'
+
+# Services
 alias nginx.start='sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
 alias nginx.stop='sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
 alias nginx.restart='nginx.stop && nginx.start'
@@ -29,6 +37,7 @@ alias mysql.restart='mysql.stop && mysql.start'
 alias mysql.logs='cd /usr/local/var/log/mysql/; ls -ltrh'
 alias osq='/usr/local/bin/osqueryi'
 
+# Apps
 alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
 
 # Easier navigation: .., ..., ~ and -
@@ -38,13 +47,10 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
-# often used folder shortcuts
+# Often used folder shortcuts
 alias drop='cd ~/Dropbox && ls -al'
-alias dot='cd ~/Dotfiles && ls -al'
-alias web='cd ~/Projects && ls -al'
-alias wire='cd ~/.composer/vendor/wireshell/wireshell'
 
-# system && random usefull stuff
+# System && random usefull stuff
 alias e='exit'
 alias md='mkdir -p'
 alias rd='rmdir'
@@ -56,10 +62,7 @@ alias dnsflush='sudo dscacheutil -flushcache'
 alias sudo='sudo '
 alias ws='wireshell'
 
-# ruby
-alias r='bundle exec ruby'
-
-# gnu coreutils
+# GNY coreutils
 alias ls="gls -al --color=auto"
 alias l='gls -al --color=auto'
 
@@ -78,44 +81,16 @@ alias gba='git branch -u origin/$(current_branch)'
 # brew
 alias b='brew'
 
-# aliases for apache, nginx, php and mysql
-alias apachestart='sudo apachectl start'
-alias apachestop='sudo apachectl stop'
-alias nginxstart='sudo nginx'
-alias nginxstop='sudo nginx -s stop'
-alias mysqlstart='mysql.server start'
-alias mysqlstop='mysql.server stop'
-alias deva='apachestart && mysqlstart'
-alias devsa='apachestop && mysqlstop'
-alias devra='devsa && deva'
-
 # tmux
 alias t='tmux -u -2'
 alias ta='tmux attach'
 
-# all in one homebrew, gem update commands
+# All in one homebrew, gem update commands
 alias brewup='brew update && brew upgrade && brew cask upgrade && brew cleanup -s'
 alias gemup='gem update --system && gem update && gem cleanup'
 alias npmup='npm -g cache clean && npm -g update && npm-check-updates -u && npm install'
 alias sysup='sudo softwareupdate -i -a'
 alias upall='sysup && brewup && gemup && npmup'
-
-# easy hosts / apache / php editing
-alias hosts='sudo vim /etc/hosts'
-alias vhosts='sudo vim /usr/local/etc/apache2/2.4/extra/httpd-vhosts.conf'
-alias nginxconf='cd /usr/local/etc/nginx/sites-available'
-alias httpdf='vim /usr/local/etc/apache2/2.4/httpd.conf'
-alias errorlog='tail -f /var/log/apache2/error.log'
-alias mycnf='sudo vim /usr/local/Cellar/mysql/5.6.17/my.cnf'
-alias salias='source ~/dotfiles/aliases'
-
-# vagrant stuff
-alias vu='vagrant up'
-alias vr='vagrant reload'
-alias vp='vagrant provision'
-alias vh='vagrant halt'
-alias vs='vagrant status'
-alias vd='vagrant destroy'
 
 # imagemagick downsampling shortcuts (c&p retina folder, run, done!)
 # http://www.imagemagick.org/Usage/filter/nicolas/#downsample
@@ -124,27 +99,13 @@ alias jpg25='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter Lanczo
 alias png50='find . -name "*.png" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
 alias jpg50='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
 
-# capistrano
-alias cap='bundle exec cap'
-alias cdd='bundle exec cap develop deploy'
-alias csd='bundle exec cap staging deploy'
-alias cpd='bundle exec cap production deploy'
-alias cpdp='bundle exec cap production deploy:pending'
-alias csdbi='bundle exec cap staging db:import'
-alias csdbe='bundle exec cap staging db:export'
-alias csdbd='bundle exec cap staging db:fetch_dump'
-
-alias tmof="lsof | awk '{ print $2 " " $1; }' | sort -rn | uniq -c | sort -rn | head -20"
-
-# NM Related
+# NM
 alias catchup-tunnel="ssh -p${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST} -L ${LOCAL_SSH_FORDWARD_PORT}:${NM_MGMt_CATCHUP_HOST}:${NM_MGMT_PORT} -N"
-
-# Mac-CLI https://github.com/guarinogabriel/mac-cli
-alias tarc='f() { mac tar:compress $1 && rm -rf $1 };f'
-alias tare='f() { mac tar:extract $1 };f'
-alias gzc='f() { mac gzip:compress $1 && rm -f $1 };f'
-alias gze='f() { mac gzip:extract $1 };f'
-
+alias cmgmt="ssh -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}"
+alias mmgmt="mkdir -p /tmp/${NM_MGMT_HOST}; sshfs -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}: /tmp/${NM_MGMT_HOST} -ocache=no -onolocalcaches -ovolname=${NM_MGMT_HOST}"
+alias pbi="ssh -L 8080:${NM_PENTAHO_HOST}:8080 -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}"
 alias sshf="f() { ssh -p${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST} -L $1 -N};f"
 
-alias ccat='pygmentize -g -O style=colorful,linenos=1'
+# Dev
+alias dev="ssh -p${DEV_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}"
+alias mdev="mkdir -p /tmp/dev; sshfs -p ${DEV_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}: /tmp/dev -ocache=no -onolocalcaches -ovolname=dev"
