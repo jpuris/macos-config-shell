@@ -1,5 +1,4 @@
 # Generic
-alias sudo='sudo '
 alias ftree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
 alias svim="sudo -E vim"
 function procload() {
@@ -13,9 +12,6 @@ alias ccat='pygmentize -g -O style=colorful,linenos=1'
 # Easy hosts
 alias hosts='sudo vim /etc/hosts'
 
-# MacOS
-alias flushdns="sudo killall -HUPDNSResponder"
-
 # Mac-CLI https://github.com/guarinogabriel/mac-cli
 alias tarc='f() { mac tar:compress $1 && rm -rf $1 };f'
 alias tare='f() { mac tar:extract $1 };f'
@@ -23,22 +19,38 @@ alias gzc='f() { mac gzip:compress $1 && rm -f $1 };f'
 alias gze='f() { mac gzip:extract $1 };f'
 
 # Services
-alias nginx.start='sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
-alias nginx.stop='sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
+## NGinx
+alias nginx.start='nginx'
+alias nginx.stop='nginx -h'
+alias nginx.enable='brew services start nginx'
+alias nginx.disable='brew services stop nginx'
 alias nginx.restart='nginx.stop && nginx.start'
-alias nginx.logs='cd /usr/local/etc/nginx/logs/; ls -ltrh'
-alias php-fpm.start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist"
-alias php-fpm.stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist"
-alias php-fpm.restart='php-fpm.stop && php-fpm.start'
-alias php-fpm.logs='cd /usr/local/var/log'
-alias mysql.start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
-alias mysql.stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+alias nginx.logs='ls -ltrh /usr/local/etc/nginx/logs/'
+
+## MariaDB
+alias mysql.start='mysql.server start'
+alias mysql.stop='mysql.server start'
+alias mysql.enable='brew services start mariadb'
+alias mysql.disable='brew services stop mariadb'
 alias mysql.restart='mysql.stop && mysql.start'
-alias mysql.logs='cd /usr/local/var/log/mysql/; ls -ltrh'
+alias mysql.logs='ls -ltrh /usr/local/var/log/mariadb/'
+
+## PostgreSQL
+alias pgsql.start='pg_ctl -D /usr/local/var/postgres start'
+alias pgsql.stop='pg_ctl -D /usr/local/var/postgres stop'
+alias pgsql.enable='brew services start postgresql'
+alias pgsql.disable='brew services stop postgresql'
+alias pgsql.restart='pgsql.stop && pgsql.start'
+alias pgsql.logs='ls -ltrh /usr/local/var/log/postgres.log'
+
+## pgAdmin
+alias pgadmin='open -a /Applications/pgAdmin\ 4.app'
+
+## Other
 alias osq='/usr/local/bin/osqueryi'
 
 # Apps
-alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
+alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 
 # Easier navigation: .., ..., ~ and -
 alias ~="cd ~"
@@ -49,6 +61,8 @@ alias .....='cd ../../../..'
 
 # Often used folder shortcuts
 alias drop='cd ~/Dropbox && ls -al'
+alias pdi.file.dev='cd ~/Dropbox/pdi_file_repository/pentaho_pdi_repository_dev'
+alias pdi.file.prod='cd ~/Dropbox/pdi_file_repository/pentaho_pdi_repository_prod'
 
 # System && random usefull stuff
 alias e='exit'
@@ -58,7 +72,7 @@ alias d='dirs -v | head -10'
 alias cl='clear'
 alias kdf='killall -kill Finder | killall -kill Dock'
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-alias dnsflush='sudo dscacheutil -flushcache'
+alias flushdns='sudo killall -HUP mDNSResponder'
 alias sudo='sudo '
 alias ws='wireshell'
 
@@ -66,31 +80,29 @@ alias ws='wireshell'
 alias ls="gls -al --color=auto"
 alias l='gls -al --color=auto'
 
-# Gitty gitgit
+# Git
 alias g="git"
 alias gf="git-flow"
 alias gst="git status"
 alias gpl='git pull origin $(current_branch)'
 alias gps='git push origin $(current_branch)'
 alias grm='git rm $(git ls-files --deleted)'
-alias gsmu='git submodule init && git submodule update'
-alias gsvn='git checkout master && git svn fetch && git merge dev && git svn rebase && git svn dcommit'
 alias gmo='$EDITOR $(git ls-files -m)'
 alias gba='git branch -u origin/$(current_branch)'
-
-# brew
-alias b='brew'
 
 # tmux
 alias t='tmux -u -2'
 alias ta='tmux attach'
 
-# All in one homebrew, gem update commands
+# brew
+alias b='brew'
+alias bcache='du -h /Users/${USER}/Library/Caches/homebrew | sort -h && echo "File count: $(ls -p /Users/${USER}/Library/Caches/homebrew/ | grep -v / | wc -l)"'
+
+# All in one homebrew, update commands
 alias brewup='brew update && brew upgrade && brew cask upgrade && brew cleanup -s'
-alias gemup='gem update --system && gem update && gem cleanup'
 alias npmup='npm -g cache clean && npm -g update && npm-check-updates -u && npm install'
 alias sysup='sudo softwareupdate -i -a'
-alias upall='sysup && brewup && gemup && npmup'
+alias upall='sysup && brewup && npmup'
 
 # imagemagick downsampling shortcuts (c&p retina folder, run, done!)
 # http://www.imagemagick.org/Usage/filter/nicolas/#downsample
