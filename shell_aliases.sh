@@ -44,7 +44,7 @@ alias mysql.restart='mysql.stop && mysql.start'
 alias mysql.logs='ls -ltrh /usr/local/var/log/mariadb/'
 
 ## PostgreSQL
-alias pgsql.start='pg_ctl -D /usr/local/var/postgres start'
+alias pgsql.start='pg_ctl -l /usr/local/var/log/postgres.log -D /usr/local/var/postgres start'
 alias pgsql.stop='pg_ctl -D /usr/local/var/postgres stop'
 alias pgsql.enable='brew services start postgresql'
 alias pgsql.disable='brew services stop postgresql'
