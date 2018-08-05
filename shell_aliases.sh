@@ -37,7 +37,7 @@ alias mongodb.logs='ls -ltrh /usr/local/var/log/mongodb/'
 
 ## MariaDB
 alias mysql.start='mysql.server start'
-alias mysql.stop='mysql.server start'
+alias mysql.stop='mysql.server stop'
 alias mysql.enable='brew services start mariadb'
 alias mysql.disable='brew services stop mariadb'
 alias mysql.restart='mysql.stop && mysql.start'
