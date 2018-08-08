@@ -25,7 +25,15 @@ alias nginx.stop='kill -QUIT $( cat /usr/local/var/run/nginx.pid )'
 alias nginx.enable='brew services start nginx'
 alias nginx.disable='brew services stop nginx'
 alias nginx.restart='nginx.stop && nginx.start'
-alias nginx.logs='ls -ltrh /usr/local/etc/nginx/logs/'
+alias nginx.logs='ls -ltrh /usr/local/var/mysql/'
+
+## Redis
+alias redis.start='redis-server /usr/local/etc/redis.conf'
+alias redis.stop="$(echo 'Sorry! Alias has not been configured yet.')"
+alias redis.enable='brew services start redis'
+alias redis.disable='brew services stop redis'
+alias redis.restart='redis.stop && redis.start'
+alias redis.logs="$(echo 'Sorry! Alias has not been configured yet.')"
 
 ## MongoDB
 alias mongodb.start='mongod --config /usr/local/etc/mongod.conf'
@@ -41,7 +49,7 @@ alias mysql.stop='mysql.server stop'
 alias mysql.enable='brew services start mariadb'
 alias mysql.disable='brew services stop mariadb'
 alias mysql.restart='mysql.stop && mysql.start'
-alias mysql.logs='ls -ltrh /usr/local/var/log/mariadb/'
+alias mysql.logs='ls -ltrh /usr/local/var/mysql/'
 
 ## PostgreSQL
 alias pgsql.start='pg_ctl -l /usr/local/var/log/postgres.log -D /usr/local/var/postgres start'
@@ -109,7 +117,7 @@ alias bcache='du -h /Users/${USER}/Library/Caches/homebrew | sort -h && echo "Fi
 
 # All in one homebrew, update commands
 alias brewup='brew update && brew upgrade && brew cask upgrade && brew cleanup -s'
-alias npmup='npm -g cache clean && npm -g update && npm-check-updates -u && npm install'
+alias npmup='npm cache verify && npm -g update && npm install'
 alias sysup='sudo softwareupdate -i -a'
 alias upall='sysup && brewup && npmup'
 
@@ -125,7 +133,7 @@ alias catchup-tunnel="ssh -p${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST} -L $
 alias cmgmt="ssh -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}"
 alias mmgmt="mkdir -p /tmp/${NM_MGMT_HOST}; sshfs -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}: /tmp/${NM_MGMT_HOST} -ocache=no -onolocalcaches -ovolname=${NM_MGMT_HOST}"
 alias pbi="ssh -L 8080:${NM_PENTAHO_HOST}:8080 -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}"
-alias sshf="f() { ssh -p${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST} -L $1 -N};f"
+alias sshf='f() { ssh -p${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST} -L $1 -N};f'
 
 # Dev
 alias dev="ssh -p${DEV_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}"
