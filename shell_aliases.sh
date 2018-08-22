@@ -117,7 +117,7 @@ alias bcache='du -h /Users/${USER}/Library/Caches/homebrew | sort -h && echo "Fi
 
 # All in one homebrew, update commands
 alias brewup='brew update && brew upgrade && brew cask upgrade && brew cleanup -s'
-alias npmup='npm cache verify && npm -g update && npm install'
+alias npmup='npm cache verify && npm install -g npm'
 alias sysup='sudo softwareupdate -i -a'
 alias upall='sysup && brewup && npmup'
 
@@ -138,3 +138,7 @@ alias sshf='f() { ssh -p${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST} -L $1 -N
 # Dev
 alias dev="ssh -p${DEV_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}"
 alias mdev="mkdir -p /tmp/dev; sshfs -p ${DEV_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}: /tmp/dev -ocache=no -onolocalcaches -ovolname=dev"
+
+# Pentaho JNDI
+alias switch_pentaho_dev="ln -vfs $HOME/.pentaho/simple-jndi/jndi-dev.properties $HOME/.pentaho/simple-jndi/jndi.properties"
+alias switch_pentaho_prod="ln -vfs $HOME/.pentaho/simple-jndi/jndi-prod.properties $HOME/.pentaho/simple-jndi/jndi.properties"
