@@ -43,6 +43,10 @@ dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 dfw() { docker container logs -f $(docker ps -aqf "name=$1"); }
 ## Tail 100 lines from running container log
 dtl() { docker container logs --tail 100 $(docker ps -aqf "name=$1"); }
+## Compose up
+alias dcu="docker-compose up"
+## Compose build
+alias dcb="docker-compose build"
 
 
 # Mac-CLI https://github.com/guarinogabriel/mac-cli
@@ -131,7 +135,6 @@ alias l='gls -al --color=auto'
 alias ll='gls -altrh --color=auto'
 
 # Git
-# Aliases
 alias g='git'
 alias gcl='git clone'
 alias gpl='git pull origin $(current_branch)'
@@ -184,8 +187,7 @@ alias npmup='npm cache verify && npm install -g npm'
 alias sysup='sudo softwareupdate -i -a'
 alias upall='sysup && brewup && npmup'
 
-# imagemagick downsampling shortcuts (c&p retina folder, run, done!)
-# http://www.imagemagick.org/Usage/filter/nicolas/#downsample
+# imagemagick downsampling shortcuts
 alias png25='find . -name "*.png" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 25% -colorspace sRGB'
 alias jpg25='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 25% -colorspace sRGB'
 alias png50='find . -name "*.png" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
