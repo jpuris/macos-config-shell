@@ -12,6 +12,39 @@ alias ccat='pygmentize -g -O style=colorful,linenos=1'
 # Easy hosts
 alias hosts='sudo vim /etc/hosts'
 
+# Docker
+## Get latest container ID
+alias dl="docker ps -l -q"
+## Get container process
+alias dps="docker ps"
+## Get process included stop container
+alias dpa="docker ps -a"
+## Get images
+alias di="docker images"
+## Run deamonized container with exposing specific ports
+dkp() { docker run -d -p $3:$3 --name $2 $1; }
+## Execute interactive container
+alias dex="docker exec -i -t"
+## Stop all containers
+dstop() { docker stop $(docker ps -q); }
+## Remove all containers
+drm() { docker rm $(docker ps -a -q); }
+## Stop and Remove all containers
+alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+## Remove all images
+dri() { docker rmi $(docker images -q); }
+## Dockerfile build, e.g., $dbu tcnksm/test 
+dbu() { docker build -t=$1 .; }
+## Show all alias related docker
+dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
+## Bash into running container
+dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+## Follow running container log
+dfw() { docker container logs -f $(docker ps -aqf "name=$1"); }
+## Tail 100 lines from running container log
+dtl() { docker container logs --tail 100 $(docker ps -aqf "name=$1"); }
+
+
 # Mac-CLI https://github.com/guarinogabriel/mac-cli
 alias tarc='f() { mac tar:compress $1 && rm -rf $1 };f'
 alias tare='f() { mac tar:extract $1 };f'
@@ -92,23 +125,53 @@ alias flushdns='sudo killall -HUP mDNSResponder'
 alias sudo='sudo '
 alias ws='wireshell'
 
-# GNY coreutils
+# GNU coreutils
 alias ls="gls -al --color=auto"
 alias l='gls -al --color=auto'
+alias ll='gls -altrh --color=auto'
 
 # Git
-alias g="git"
-alias gf="git-flow"
-alias gst="git status"
+# Aliases
+alias g='git'
+alias gcl='git clone'
 alias gpl='git pull origin $(current_branch)'
 alias gps='git push origin $(current_branch)'
-alias grm='git rm $(git ls-files --deleted)'
-alias gmo='$EDITOR $(git ls-files -m)'
-alias gba='git branch -u origin/$(current_branch)'
-
-# tmux
-alias t='tmux -u -2'
-alias ta='tmux attach'
+alias ga='git add'
+alias grm='git rm'
+alias gmv='git mv'
+alias gap='git add -p'
+alias gall='git add -A'
+alias gf='git fetch --all --prune'
+alias gus='git reset HEAD'
+alias gpristine='git reset --hard && git clean -dfx'
+alias gclean='git clean -fd'
+alias gm="git merge"
+alias gs='git status'
+alias gss='git status -s'
+alias gr='git remote'
+alias gd='git diff'
+alias gc='git commit -v'
+alias gcm='git commit -v -m'
+alias gb='git branch'
+alias gco='git checkout'
+alias gll='git log --graph --pretty=oneline --abbrev-commit'
+alias gg="git log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset %s %C(yellow)<%an> %C(cyan)(%cr)%Creset' --abbrev-commit --date=relative"
+alias ggs="gg --stat"
+alias gsl="git shortlog -sn"
+alias gwc="git whatchanged"
+alias gt="git tag"
+alias gta="git tag -a"
+alias gtd="git tag -d"
+alias gtl="git tag -l"
+## Show commits since last pull
+alias gnew="git log HEAD@{1}..HEAD@{0}"
+## Add uncommitted and unstaged changes to the last commit
+alias gcaa="git commit -a --amend -C HEAD"
+alias gcsam="git commit -S -am"
+alias gstd="git stash drop"
+alias gstl="git stash list"
+alias gh='cd "$(git rev-parse --show-toplevel)"'
+alias gtls="git tag -l | gsort -V"
 
 # brew
 alias b='brew'
