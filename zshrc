@@ -2,7 +2,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # Path to your oh-my-zsh configuration.
 ZSH=~/.oh-my-zsh
 
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting kubectl)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -33,3 +33,4 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # Pyenv
 export PATH="/User/jp/.pyenv:$PATH"
 eval "$(pyenv init -)"
+
