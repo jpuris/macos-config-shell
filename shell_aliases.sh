@@ -13,39 +13,23 @@ alias ccat='pygmentize -g -O style=colorful,linenos=1'
 alias hosts='sudo vim /etc/hosts'
 
 # Docker
-## Get latest container ID
 alias dl="docker ps -l -q"
-## Get container process
 alias dps="docker ps"
-## Get process included stop container
 alias dpa="docker ps -a"
-## Get images
 alias di="docker images"
-## Run deamonized container with exposing specific ports
 dkp() { docker run -d -p $3:$3 --name $2 $1; }
-## Execute interactive container
 alias dex="docker exec -i -t"
-## Stop all containers
 dstop() { docker stop $(docker ps -q); }
-## Remove all containers
 drm() { docker rm $(docker ps -a -q); }
-## Stop and Remove all containers
 alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
-## Remove all images
 dri() { docker rmi $(docker images -q); }
-## Dockerfile build, e.g., $dbu tcnksm/test 
 dbu() { docker build -t=$1 .; }
-## Show all alias related docker
 dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
-## Bash into running container
 dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
-## Follow running container log
 dfw() { docker container logs -f $(docker ps -aqf "name=$1"); }
-## Tail 100 lines from running container log
 dtl() { docker container logs --tail 100 $(docker ps -aqf "name=$1"); }
-## Compose up
 alias dcu="docker-compose up"
-## Compose build
+alias dcd="docker-compose down"
 alias dcb="docker-compose build"
 
 # Contexts
