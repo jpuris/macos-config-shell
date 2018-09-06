@@ -20,6 +20,7 @@ alias di="docker images"
 dkp() { docker run -d -p $3:$3 --name $2 $1; }
 alias dex="docker exec -i -t"
 dstop() { docker stop $(docker ps -q); }
+dstart() { docker start $1; }
 drm() { docker rm $(docker ps -a -q); }
 alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 dri() { docker rmi $(docker images -q); }
