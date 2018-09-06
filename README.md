@@ -9,8 +9,8 @@ test -e ${HOME}/.env_vars.sh && mv ${HOME}/.env_vars.sh ${HOME}/origin_shell_con
 ```
 ### Clone repo
 ```
-git clone git@gitlab.com:janis.puris/shell-config.git
-cd .shell-config
+git clone git@github.com:chilicoffee/macos-config-shell.git
+cd macos-config-shell
 ```
 ### Set up the symlinks to new config
 ```
