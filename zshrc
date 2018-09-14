@@ -19,6 +19,7 @@ export PATH="$HOME/.jenv/bin:$PATH"
 export PATH="$PATH:/Applications/mongodb"
 export PATH="/usr/local/opt/mongodb@3.2/bin:$PATH"
 export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 # END
 
 # Locale fix

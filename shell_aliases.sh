@@ -21,7 +21,7 @@ dkp() { docker run -d -p $3:$3 --name $2 $1; }
 alias dex="docker exec -i -t"
 dstop() { docker stop $(docker ps -q); }
 dstart() { docker start $1; }
-drm() { docker rm $(docker ps -a -q); }
+alias drm="docker rm"
 alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 dri() { docker rmi $(docker images -q); }
 dbu() { docker build -t=$1 .; }
@@ -119,6 +119,11 @@ alias kes='kubectl edit services'
 alias kgas='get_cluster_resources services'
 alias kgs='kubectl get services'
 alias kgsy='kubectl get services -o yaml'
+
+# Exec
+
+alias keti='kubectl exec -ti'
+alias kex='kubectl exec'
 
 # Mac-CLI https://github.com/guarinogabriel/mac-cli
 alias tarc='f() { mac tar:compress $1 && rm -rf $1 };f'
