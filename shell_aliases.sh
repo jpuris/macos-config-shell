@@ -259,7 +259,7 @@ alias bcache='du -h /Users/${USER}/Library/Caches/homebrew | sort -h && echo "Fi
 
 # All in one homebrew, update commands
 alias brewup='brew update && brew upgrade && brew cask upgrade && brew cleanup -s'
-alias npmup='npm cache verify && npm install -g npm'
+alias npmup='npm cache verify && npm install -g npm && npm install -g'
 alias sysup='sudo softwareupdate -i -a'
 alias upall='sysup && brewup && npmup'
 
