@@ -9,6 +9,9 @@ alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 alias tmof="lsof | awk '{ print $2 " " $1; }' | sort -rn | uniq -c | sort -rn | head -20"
 alias ccat='pygmentize -g -O style=colorful,linenos=1'
 
+# LSD
+alias ls='lsd -ltr'
+
 # Easy hosts
 alias hosts='sudo vim /etc/hosts'
 
@@ -29,101 +32,10 @@ dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/[
 dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 dfw() { docker container logs -f $(docker ps -aqf "name=$1"); }
 dtl() { docker container logs --tail 100 $(docker ps -aqf "name=$1"); }
-alias dcu="docker-compose up"
+alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
 alias dcb="docker-compose build"
-
-# Contexts
-alias kcc='kubectl config get-contexts'
-alias kctx='kubectx'
-
-# Core
-alias k='kubectl'
-alias kc='kubectl'
-alias kube='kubectl'
-alias kd='kubectl delete'
-alias kds='kubectl describe service'
-alias ke='kubectl edit'
-alias kg='kubectl get'
-alias kga='kubectl get --all-namespaces'
-alias kl='kubectl logs'
-alias kcl='kubectl logs'
-alias klf='kubectl logs -f'
-alias kra='krender; kapply'
-
-# Cronjobs
-alias kdsc='kubectl describe cronjobs'
-alias kec='kubectl edit cronjobs'
-alias kgc='kubectl get cronjobs'
-alias kgcy='kubectl get cronjobs -o yaml'
-alias kgac='get_cluster_resources cronjobs'
-
-# Deployments
-alias kdd='kubectl delete deployment'
-alias kdsd='kubectl describe deployments'
-alias ked='kubectl edit deployments'
-alias kgd='kubectl get deployments'
-alias kgdy='kubectl get deployments -o yaml'
-
-# From file
-alias kaf='kubectl apply -f'
-alias kcf='kubectl create -f'
-alias kdf='kubectl delete -f'
-alias kef='kubectl edit -f'
-alias kdsf='kubectl describe -f'
-alias kgf='kubectl get -f'
-
-# Ingress
-alias kdi='kubectl delete ingress'
-alias kgi='kubectl get ingress'
-alias kei='kubectl edit ingress'
-alias kgiy='kubectl get ingress -o yaml'
-alias kdsi='kubectl describe ingress'
-alias kgai='get_cluster_resources ingress'
-
-# Jobs
-alias kdj='kubectl delete job'
-alias kdsj='kubectl describe jobs'
-alias kej='kubectl edit jobs'
-alias kgj='kubectl get jobs'
-alias kgjy='kubectl get jobs -o yaml'
-alias kgaj='get_cluster_resources jobs'
-
-# Namespaces
-alias kdns='kubectl delete namespaces'
-alias kdsns='kubectl describe namespaces'
-alias kens='kubectl edit namespaces'
-alias kgns='kubectl get namespaces'
-alias kgnsy='kubectl get namespaces -o yaml'
-alias kns='kubens'
-
-# Nodes
-alias kdsn='kubectl describe nodes'
-alias ken='kubectl edit nodes'
-alias kgn='kubectl get nodes -o wide'
-alias kgny='kubectl get nodes -o yaml'
-alias ktn='kubectl top nodes'
-
-# Pods
-alias kdp='kubectl delete pod'
-alias kdsp='kubectl describe pods'
-alias kep='kubectl edit pods'
-alias kgap='get_cluster_resources pods'
-alias kgp='kubectl get pods'
-alias kgpy='kubectl get pods -o yaml'
-alias ktp='kubectl top pods'
-
-# Services
-alias kdss='kubectl describe services'
-alias kes='kubectl edit services'
-alias kgas='get_cluster_resources services'
-alias kgs='kubectl get services'
-alias kgsy='kubectl get services -o yaml'
-
-# Exec
-
-alias keti='kubectl exec -ti'
-alias kex='kubectl exec'
+alias dcl="docker-compose logs -f -t"
 
 # Mac-CLI https://github.com/guarinogabriel/mac-cli
 alias tarc='f() { mac tar:compress $1 && rm -rf $1 };f'
@@ -205,11 +117,6 @@ alias flushdns='sudo killall -HUP mDNSResponder'
 alias sudo='sudo '
 alias ws='wireshell'
 
-# GNU coreutils
-alias ls="gls -al --color=auto"
-alias l='gls -al --color=auto'
-alias ll='gls -altrh --color=auto'
-
 # Git
 alias g='git'
 alias gcl='git clone'
@@ -268,13 +175,6 @@ alias png25='find . -name "*.png" | xargs mogrify -colorspace RGB -filter Lanczo
 alias jpg25='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 25% -colorspace sRGB'
 alias png50='find . -name "*.png" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
 alias jpg50='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
-
-# NM
-alias catchup-tunnel="ssh -p${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST} -L ${LOCAL_SSH_FORDWARD_PORT}:${NM_MGMt_CATCHUP_HOST}:${NM_MGMT_PORT} -N"
-alias cmgmt="ssh -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}"
-alias mmgmt="mkdir -p /tmp/${NM_MGMT_HOST}; sshfs -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}: /tmp/${NM_MGMT_HOST} -ocache=no -onolocalcaches -ovolname=${NM_MGMT_HOST}"
-alias pbi="ssh -L 8080:${NM_PENTAHO_HOST}:8080 -p ${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST}"
-alias sshf='f() { ssh -p${NM_MGMT_PORT} ${NM_MGMT_USER}@${NM_MGMT_HOST} -L $1 -N};f'
 
 # Dev
 alias dev="ssh -p${DEV_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}"
