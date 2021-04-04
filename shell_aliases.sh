@@ -8,12 +8,22 @@ alias gnuplot='gnuplot -p'
 alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 alias tmof="lsof | awk '{ print $2 " " $1; }' | sort -rn | uniq -c | sort -rn | head -20"
 alias ccat='pygmentize -g -O style=colorful,linenos=1'
+alias rdon="diskutil partitionDisk $(hdiutil attach -nomount ram://8388608) 1 GPTFormat APFS 'ramdisk' '100%'"
+alias rdoff="diskutil eject /volumes/ramdisk"
 
 # LSD
 alias ls='lsd -ltr'
+alias ll='lsd -ltr'
+alias l='lsd -ltr'
 
 # Easy hosts
 alias hosts='sudo vim /etc/hosts'
+
+# Jupyter
+alias jn='jupyter notebook'
+
+# Python virtualenv
+alias activate="source venv/bin/activate"
 
 # Docker
 alias dl="docker ps -l -q"
@@ -36,6 +46,14 @@ alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
 alias dcb="docker-compose build"
 alias dcl="docker-compose logs -f -t"
+
+# istio
+alias i='istioctl'
+alias ig='istioctl get'
+alias ic='istioctl create -f'
+alias ir='istioctl replace -f'
+alias idl='istioctl delete'
+alias iij='istioctl kube-inject -f'
 
 # Mac-CLI https://github.com/guarinogabriel/mac-cli
 alias tarc='f() { mac tar:compress $1 && rm -rf $1 };f'
@@ -165,7 +183,7 @@ alias bpurge='brew cleanup && brew cleanup -s && brew services cleanup'
 alias bcache='du -h /Users/${USER}/Library/Caches/homebrew | sort -h && echo "File count: $(ls -p /Users/${USER}/Library/Caches/homebrew/ | grep -v / | wc -l)"'
 
 # All in one homebrew, update commands
-alias brewup='brew update && brew upgrade && brew cask upgrade && brew cleanup -s'
+alias brewup='brew update && brew upgrade && brew upgrade --cask && brew cleanup -s'
 alias npmup='npm cache verify && npm install -g npm && npm install -g'
 alias sysup='sudo softwareupdate -i -a'
 alias upall='sysup && brewup && npmup'
@@ -186,3 +204,6 @@ alias switch_pentaho_prod="ln -vfs $HOME/.pentaho/simple-jndi/jndi-prod.properti
 
 # WDMC
 alias wdmc="ssh -oHostKeyAlgorithms=+ssh-dss -p${WDMC_HOST_PORT} ${WDMC_HOST_USER}@${WDMC_HOST}"
+
+# Other stuff
+alias myip="curl checkip.amazonaws.com"
