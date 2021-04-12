@@ -47,6 +47,12 @@ alias dcd="docker-compose down"
 alias dcb="docker-compose build"
 alias dcl="docker-compose logs -f -t"
 
+# k9s
+alias k9s="k9s --readonly"
+alias kns="k9s --readonly"
+alias k9sw="k9s"
+alias knsw="k9s"
+
 # istio
 alias i='istioctl'
 alias ig='istioctl get'
@@ -61,50 +67,6 @@ alias tare='f() { mac tar:extract $1 };f'
 alias gzc='f() { mac gzip:compress $1 && rm -f $1 };f'
 alias gze='f() { mac gzip:extract $1 };f'
 
-# Services
-## NGinx
-alias nginx.start='nginx'
-alias nginx.stop='kill -QUIT $( cat /usr/local/var/run/nginx.pid )'
-alias nginx.enable='brew services start nginx'
-alias nginx.disable='brew services stop nginx'
-alias nginx.restart='nginx.stop && nginx.start'
-alias nginx.logs='ls -ltrh /usr/local/var/mysql/'
-
-## Redis
-alias redis.start='redis-server /usr/local/etc/redis.conf'
-alias redis.stop="$(echo 'Sorry! Alias has not been configured yet.')"
-alias redis.enable='brew services start redis'
-alias redis.disable='brew services stop redis'
-alias redis.restart='redis.stop && redis.start'
-alias redis.logs="$(echo 'Sorry! Alias has not been configured yet.')"
-
-## MongoDB
-alias mongodb.start='mongod --config /usr/local/etc/mongod.conf'
-alias mongodb.stop='mongo admin --eval "db.shutdownServer()"'
-alias mongodb.enable='brew services start mongodb'
-alias mongodb.disable='brew services stop mongodb'
-alias mongodb.restart='mongodb.stop && mongodb.start'
-alias mongodb.logs='ls -ltrh /usr/local/var/log/mongodb/'
-
-## MariaDB
-alias mysql.start='mysql.server start'
-alias mysql.stop='mysql.server stop'
-alias mysql.enable='brew services start mariadb'
-alias mysql.disable='brew services stop mariadb'
-alias mysql.restart='mysql.stop && mysql.start'
-alias mysql.logs='ls -ltrh /usr/local/var/mysql/'
-
-## PostgreSQL
-alias pgsql.start='pg_ctl -l /usr/local/var/log/postgres.log -D /usr/local/var/postgres start'
-alias pgsql.stop='pg_ctl -D /usr/local/var/postgres stop'
-alias pgsql.enable='brew services start postgresql'
-alias pgsql.disable='brew services stop postgresql'
-alias pgsql.restart='pgsql.stop && pgsql.start'
-alias pgsql.logs='ls -ltrh /usr/local/var/log/postgres.log'
-
-## pgAdmin
-alias pgadmin='open -a /Applications/pgAdmin\ 4.app'
-
 ## Other
 alias osq='/usr/local/bin/osqueryi'
 
@@ -117,11 +79,6 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-
-# Often used folder shortcuts
-alias drop='cd ~/Dropbox && ls -al'
-alias pdi.file.dev='cd ~/Dropbox/pdi_file_repository/pentaho_pdi_repository_dev'
-alias pdi.file.prod='cd ~/Dropbox/pdi_file_repository/pentaho_pdi_repository_prod'
 
 # System && random usefull stuff
 alias e='exit'
@@ -197,10 +154,6 @@ alias jpg50='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter Lanczo
 # Dev
 alias dev="ssh -p${DEV_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}"
 alias mdev="mkdir -p /tmp/dev; sshfs -p ${DEV_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}: /tmp/dev -ocache=no -onolocalcaches -ovolname=dev"
-
-# Pentaho JNDI
-alias switch_pentaho_dev="ln -vfs $HOME/.pentaho/simple-jndi/jndi-dev.properties $HOME/.pentaho/simple-jndi/jndi.properties"
-alias switch_pentaho_prod="ln -vfs $HOME/.pentaho/simple-jndi/jndi-prod.properties $HOME/.pentaho/simple-jndi/jndi.properties"
 
 # WDMC
 alias wdmc="ssh -oHostKeyAlgorithms=+ssh-dss -p${WDMC_HOST_PORT} ${WDMC_HOST_USER}@${WDMC_HOST}"
