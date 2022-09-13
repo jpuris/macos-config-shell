@@ -1,12 +1,8 @@
 # Generic
 alias ftree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
 alias svim="sudo -E vim"
-function procload() {
-	top -b -n 1 | awk '{if (NR <=7) print; else if ($8 == "D") {print; count++} } END {print "Total status D (I/O wait probably): "count}'
-}
 alias gnuplot='gnuplot -p'
 alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
-alias tmof="lsof | awk '{ print $2 " " $1; }' | sort -rn | uniq -c | sort -rn | head -20"
 alias ccat='pygmentize -g -O style=colorful,linenos=1'
 alias rdon="diskutil partitionDisk $(hdiutil attach -nomount ram://8388608) 1 GPTFormat APFS 'ramdisk' '100%'"
 alias rdoff="diskutil eject /volumes/ramdisk"
@@ -42,10 +38,18 @@ dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/[
 dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 dfw() { docker container logs -f $(docker ps -aqf "name=$1"); }
 dtl() { docker container logs --tail 100 $(docker ps -aqf "name=$1"); }
+
+# Docker compose
 alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
 alias dcb="docker-compose build"
 alias dcl="docker-compose logs -f -t"
+
+# kubectl
+alias k="kubectl"
+
+# terraform
+alias tf="terraform"
 
 # k9s
 alias k9s="k9s --readonly"
@@ -150,13 +154,6 @@ alias png25='find . -name "*.png" | xargs mogrify -colorspace RGB -filter Lanczo
 alias jpg25='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 25% -colorspace sRGB'
 alias png50='find . -name "*.png" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
 alias jpg50='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
-
-# Dev
-alias dev="ssh -p${DEV_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}"
-alias mdev="mkdir -p /tmp/dev; sshfs -p ${DEV_MGMT_PORT} ${DEV_MGMT_USER}@${DEV_MGMT_HOST}: /tmp/dev -ocache=no -onolocalcaches -ovolname=dev"
-
-# WDMC
-alias wdmc="ssh -oHostKeyAlgorithms=+ssh-dss -p${WDMC_HOST_PORT} ${WDMC_HOST_USER}@${WDMC_HOST}"
 
 # Other stuff
 alias myip="curl checkip.amazonaws.com"
