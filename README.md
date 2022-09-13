@@ -1,31 +1,43 @@
 # JP's ZSH environment config
+
 ## Installation
+
 ### Backup current config
+
 ```
 mkdir ${HOME}/origin_shell_config
 test -e ${HOME}/.shell_aliases.sh && mv ${HOME}/.shell_aliases.sh ${HOME}/origin_shell_config/
 test -e ${HOME}/.zshrc && mv ${HOME}/.zshrc ${HOME}/origin_shell_config/
 test -e ${HOME}/.env_vars.sh && mv ${HOME}/.env_vars.sh ${HOME}/origin_shell_config/
 ```
+
 ### Clone repo
+
 ```
-git clone git@github.com:chilicoffee/macos-config-shell.git
-cd macos-config-shell
+git clone git@github.com:jpuris/macos-config-shell.git .macos-config-shell
+cd .macos-config-shell
 ```
+
 ### Set up the symlinks to new config
+
 ```
 ln -s $(pwd)/shell_aliases.sh ${HOME}/.shell_aliases.sh
 ln -s $(pwd)/zshrc ${HOME}/.zshrc
 touch ${HOME}/.env_vars.sh
 ```
+
 ## Dependencies
+
 ### Mandatory
+
 - ZSH
 - Oh My ZSH
 - npm
 - pyenv
+- [starship](https://starship.rs)
 
 ### Optional
+
 - homebrew
 - ...
 
