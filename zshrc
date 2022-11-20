@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/jp/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # History timestamps
 HIST_STAMPS="yyyy-mm-dd"
@@ -12,6 +12,7 @@ plugins=(
     docker
     docker-compose
     kubectl
+    kubectx
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -31,11 +32,18 @@ export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.8/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.9/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.10/bin:$PATH"
+export PATH="/opt/homebrew/opt/python@3.11/bin:$PATH"
 # END
 
 # pyenv
-eval "$(pyenv init --path)"
+export PATH="$HOME/.local/bin:$PATH"
+
+PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# pyenv auto-activate
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # User configuration
 ## SOURCE ALIASES
@@ -58,6 +66,12 @@ export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 
 # heroku autocomplete setup
-HEROKU_AC_ZSH_SETUP_PATH=/Users/jp/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+HEROKU_AC_ZSH_SETUP_PATH=$HOME/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
-cd ~
+# >>> conda initialize >>>
+if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+    . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+else
+    export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+fi
+# <<< conda initialize <<<export

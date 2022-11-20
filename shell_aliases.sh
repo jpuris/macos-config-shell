@@ -20,6 +20,13 @@ alias jn='jupyter notebook'
 
 # Python virtualenv
 alias activate="source venv/bin/activate"
+alias nvenv="python3 -m venv venv && activate"
+
+# Conda
+alias ceu="conda env update"
+alias cl="conda list"
+alias ci="conda install"
+alias cr="conda remove"
 
 # Docker
 alias dl="docker ps -l -q"
@@ -50,6 +57,12 @@ alias k="kubectl"
 
 # terraform
 alias tf="terraform"
+
+# Ansible
+alias as="ansible"
+alias asp="ansible-playbook"
+alias asi="ansible-inventory"
+alias asc="ansible-config"
 
 # k9s
 alias k9s="k9s --readonly"
@@ -89,7 +102,7 @@ alias e='exit'
 alias md='mkdir -p'
 alias rd='rmdir'
 alias d='dirs -v | head -10'
-alias cl='clear'
+alias clr='clear'
 alias kdf='killall -kill Finder | killall -kill Dock'
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 alias flushdns='sudo killall -HUP mDNSResponder'
