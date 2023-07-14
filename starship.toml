@@ -1,0 +1,37 @@
+format = """$time\
+$aws\
+$gcloud\
+$kubernetes\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$docker_context\
+$python\
+$terraform\
+$conda\
+$sudo\
+$line_break\
+$directory\
+$line_break\
+$character"""
+
+[python]
+pyenv_version_name = true
+
+[nodejs]
+disabled = true
+
+[aws]
+format = '[$symbol($profile )(\($region\) )](bold yellow)'
+#symbol = "🅰 "
+
+[kubernetes]
+format = '[⎈: $context \($namespace\)](blue) '
+disabled = false
+
+[time]
+disabled = false
+format = '[\[$time\]]($style) '
