@@ -29,25 +29,25 @@ export PATH="/usr/local/bin/:$PATH"
 export PATH="/opt/X11/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
-export PATH="/opt/homebrew/opt/python@3.8/bin:$PATH"
-export PATH="/opt/homebrew/opt/python@3.9/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.10/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.11/bin:$PATH"
-# END
+
+# PostrgeSQL
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+
+# OpenSSL
+export LDFLAGS="-L/opt/homebrew/opt/openssl@1.1/lib -L/opt/homebrew/opt/libpq/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@1.1/include -I/opt/homebrew/opt/libpq/include"
 
 # pyenv
-export PATH="$HOME/.local/bin:$PATH"
-
-PYENV_ROOT="$HOME/.pyenv"
+export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-
-# pyenv auto-activate
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # User configuration
 ## SOURCE ALIASES
 source ~/.shell_aliases.sh
+source ~/.shell_aliases_private.sh
 
 # Locale fix
 export LC_CTYPE=en_US.UTF-8
@@ -62,16 +62,3 @@ eval "$(starship init zsh)"
 # HISTORY
 setopt inc_append_history
 
-export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
-
-# heroku autocomplete setup
-HEROKU_AC_ZSH_SETUP_PATH=$HOME/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
-
-# >>> conda initialize >>>
-if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-    . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-else
-    export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
-fi
-# <<< conda initialize <<<export

@@ -1,6 +1,7 @@
 # Generic
-alias ftree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
+#alias ftree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
 alias svim="sudo -E vim"
+alias vim="nvim"
 alias gnuplot='gnuplot -p'
 alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 alias ccat='pygmentize -g -O style=colorful,linenos=1'
@@ -8,7 +9,6 @@ alias rdon="diskutil partitionDisk $(hdiutil attach -nomount ram://8388608) 1 GP
 alias rdoff="diskutil eject /volumes/ramdisk"
 
 # LSD
-alias ls='lsd -ltr'
 alias ll='lsd -ltr'
 alias l='lsd -ltr'
 
@@ -19,32 +19,26 @@ alias hosts='sudo vim /etc/hosts'
 alias jn='jupyter notebook'
 
 # Python virtualenv
-alias activate="source venv/bin/activate"
-alias nvenv="python3 -m venv venv && activate"
-
-# Conda
-alias ceu="conda env update"
-alias cl="conda list"
-alias ci="conda install"
-alias cr="conda remove"
+alias activate="source .venv/bin/activate"
+alias nvenv="python -m venv .venv && activate"
 
 # Docker
 alias dl="docker ps -l -q"
 alias dps="docker ps"
 alias dpa="docker ps -a"
 alias di="docker images"
-dkp() { docker run -d -p $3:$3 --name $2 $1; }
+#dkp() { docker run -d -p $3:$3 --name $2 $1; }
 alias dex="docker exec -i -t"
-dstop() { docker stop $(docker ps -q); }
-dstart() { docker start $1; }
+#dstop() { docker stop $(docker ps -q); }
+#dstart() { docker start $1; }
 alias drm="docker rm"
 alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
-dri() { docker rmi $(docker images -q); }
-dbu() { docker build -t=$1 .; }
-dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
-dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
-dfw() { docker container logs -f $(docker ps -aqf "name=$1"); }
-dtl() { docker container logs --tail 100 $(docker ps -aqf "name=$1"); }
+#dri() { docker rmi $(docker images -q); }
+#dbu() { docker build -t=$1 .; }
+#dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
+#dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+#dfw() { docker container logs -f $(docker ps -aqf "name=$1"); }
+#dtl() { docker container logs --tail 100 $(docker ps -aqf "name=$1"); }
 
 # Docker compose
 alias dcu="docker-compose up -d"
@@ -78,24 +72,11 @@ alias ir='istioctl replace -f'
 alias idl='istioctl delete'
 alias iij='istioctl kube-inject -f'
 
-# Mac-CLI https://github.com/guarinogabriel/mac-cli
-alias tarc='f() { mac tar:compress $1 && rm -rf $1 };f'
-alias tare='f() { mac tar:extract $1 };f'
-alias gzc='f() { mac gzip:compress $1 && rm -f $1 };f'
-alias gze='f() { mac gzip:extract $1 };f'
-
 ## Other
 alias osq='/usr/local/bin/osqueryi'
 
 # Apps
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
-
-# Easier navigation: .., ..., ~ and -
-alias ~="cd ~"
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
 
 # System && random usefull stuff
 alias e='exit'
@@ -154,10 +135,9 @@ alias gtls="git tag -l | gsort -V"
 # brew
 alias b='brew'
 alias bpurge='brew cleanup && brew cleanup -s && brew services cleanup'
-alias bcache='du -h /Users/${USER}/Library/Caches/homebrew | sort -h && echo "File count: $(ls -p /Users/${USER}/Library/Caches/homebrew/ | grep -v / | wc -l)"'
 
 # All in one homebrew, update commands
-alias brewup='brew update && brew upgrade && brew upgrade --cask && brew cleanup -s'
+alias brewup='brew update && brew upgrade && brew upgrade --cask && brew cleanup -s && backup'
 alias npmup='npm cache verify && npm install -g npm && npm install -g'
 alias sysup='sudo softwareupdate -i -a'
 alias upall='sysup && brewup && npmup'
@@ -168,5 +148,13 @@ alias jpg25='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter Lanczo
 alias png50='find . -name "*.png" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
 alias jpg50='find . -name "*.jpg" | xargs mogrify -colorspace RGB -filter LanczosRadius -distort Resize 50% -colorspace sRGB'
 
+# meltano
+alias m='meltano'
+
 # Other stuff
 alias myip="curl checkip.amazonaws.com"
+alias ts="ts '[%Y-%m-%d %H:%M:%S]'"
+
+# Mackup
+alias backup='mackup backup --force'
+
